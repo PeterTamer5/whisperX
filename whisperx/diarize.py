@@ -6,7 +6,7 @@ import torch
 
 from whisperx.audio import load_audio, SAMPLE_RATE
 from whisperx.types import TranscriptionResult, AlignedTranscriptionResult
-
+from whisperx import pyannote_model_location
 
 class DiarizationPipeline:
     def __init__(
@@ -17,8 +17,7 @@ class DiarizationPipeline:
     ):
         if isinstance(device, str):
             device = torch.device(device)
-        model_config = model_name or "pyannote/speaker-diarization-3.1"
-        self.model = Pipeline.from_pretrained(model_config, use_auth_token=use_auth_token).to(device)
+        self.model = Pipeline.from_pretrained(pyannote_model_location).to(device)
 
     def __call__(
         self,
