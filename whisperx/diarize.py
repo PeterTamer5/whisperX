@@ -17,7 +17,7 @@ class DiarizationPipeline:
     ):
         if isinstance(device, str):
             device = torch.device(device)
-        self.model = Pipeline.from_pretrained(pyannote_model_location).to(device)
+        self.model = Pipeline.from_pretrained(pyannote_model_location, local_files_only=True).to(device)
 
     def __call__(
         self,
